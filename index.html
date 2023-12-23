@@ -1,12 +1,407 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suitmedia Test</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suit Media</title>
+    <link rel="stylesheet" href="components.css" />
+    <script src="components.js"></script>
+    <link rel="modulepreload" href="iframe-alpine-964dceff.js" />
+    <link rel="modulepreload" href="iframe-a81dc9a8.js" />
+    <script type="module" src="iframe-alpine-964dceff.js"></script>
+    <link rel="modulepreload" href="_commonjsHelpers-87174ba5.js" />
+    <style>
+      .ideas {
+        position: relative;
+        display: inline-block;
+      }
+
+      .ideas::before {
+        content: '';
+        margin-bottom: -10px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 5px;
+        background-color: #fff;
+      }
+
+      .h-half-white {
+        border-left: 100vw solid transparent;
+        border-bottom: 20vh solid white;
+      }
+
+      .list-item {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="bg-white pb-24">
+    <!-- Navbars -->
+    <nav class="bg-orange-500 sm:px-24 py-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between">
+          <div class="text-white font-bold text-xl">
+            <img src="logo.png" style="width: 100px" />
+          </div>
+          <div class="hidden md:block">
+            <div class="flex items-baseline space-x-4">
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-medium">Work</a>
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-medium">About</a>
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-medium">Services</a>
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-bold">
+                <span class="ideas">Ideas</span>
+              </a>
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-medium">Careers</a>
+              <a href="#" class="text-white px-2 py-2 rounded-md text-md font-medium">Contact</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbars -->
+
+    <!-- Hero Section -->
+    <div class="relative isolate overflow-hidden pt-14">
+      <img style="filter: brightness(50%)" src="background.jpg" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <!-- <div class="absolute bottom-0 left-0 w-full h-half-white -z-10"></div> -->
+      <div class="absolute bottom-0 right-0 w-0 h-0 h-half-white border-black -z-10"></div>
+      <div class="mx-auto max-w-2xl pb-36 pt-24 z-50">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Ideas</h1>
+          <p class="mt-2 text-lg leading-8 text-gray-300">Where all our great things begin</p>
+        </div>
+      </div>
+    </div>
+    <!-- Hero Section -->
+
+    <!-- Show Sort -->
+    <section aria-labelledby="filter-heading">
+      <div class="bg-white pt-12">
+        <div class="flex items-center justify-between sm:px-24">
+          <div x-data="Components.menu({ open: false })" x-init="init()" @keydown.escape.stop="open = false; focusButton()" @click.away="onClickAway($event)" class="relative inline-block text-left">
+            <div class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">Showing 1 - 10 of 100</div>
+          </div>
+
+          <div class="hidden sm:block">
+            <div class="flow-root">
+              <div class="-mx-4 flex items-center divide-x divide-gray-200" x-data="Components.popoverGroup()" x-init="init()">
+                <!--  -->
+                <div x-data="Components.menu({ open: false })" x-init="init()" @keydown.escape.stop="open = false; focusButton()" @click.away="onClickAway($event)" class="px-4 relative inline-block text-left">
+                  <div>
+                    <button
+                      type="button"
+                      class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                      id="menu-button"
+                      x-ref="button"
+                      @click="onButtonClick()"
+                      @keyup.space.prevent="onButtonEnter()"
+                      @keydown.enter.prevent="onButtonEnter()"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      x-bind:aria-expanded="open.toString()"
+                      @keydown.arrow-up.prevent="onArrowUp()"
+                      @keydown.arrow-down.prevent="onArrowDown()">
+                      Show per page:
+                      <b class="pl-2">10</b>
+                      <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div
+                    x-show="open"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    x-ref="menu-items"
+                    x-description="Dropdown menu, show/hide based on menu state."
+                    x-bind:aria-activedescendant="activeDescendant"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="menu-button"
+                    tabindex="-1"
+                    @keydown.arrow-up.prevent="onArrowUp()"
+                    @keydown.arrow-down.prevent="onArrowDown()"
+                    @keydown.tab="open = false"
+                    @keydown.enter.prevent="open = false; focusButton()"
+                    @keyup.space.prevent="open = false; focusButton()"
+                    style="display: none">
+                    <div class="py-1" role="none">
+                      <a
+                        href="#"
+                        class="font-medium text-gray-900 block px-4 py-2 text-sm"
+                        x-state:on="Active"
+                        x-state:off="Not Active"
+                        x-state:on:option.current="Selected"
+                        x-state:off:option.current="Not Selected"
+                        x-state-description='Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"'
+                        :class="{ 'bg-gray-100': activeIndex === 0 }"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-0"
+                        @mouseenter="onMouseEnter($event)"
+                        @mousemove="onMouseMove($event, 0)"
+                        @mouseleave="onMouseLeave($event)"
+                        @click="open = false; focusButton()"
+                        >10</a
+                      >
+                      <a
+                        href="#"
+                        class="text-gray-500 block px-4 py-2 text-sm"
+                        x-state-description='undefined: "font-medium text-gray-900", undefined: "text-gray-500"'
+                        :class="{ 'bg-gray-100': activeIndex === 1 }"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-1"
+                        @mouseenter="onMouseEnter($event)"
+                        @mousemove="onMouseMove($event, 1)"
+                        @mouseleave="onMouseLeave($event)"
+                        @click="open = false; focusButton()"
+                        >20</a
+                      >
+                      <a
+                        href="#"
+                        class="text-gray-500 block px-4 py-2 text-sm"
+                        x-state-description='undefined: "font-medium text-gray-900", undefined: "text-gray-500"'
+                        :class="{ 'bg-gray-100': activeIndex === 2 }"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-2"
+                        @mouseenter="onMouseEnter($event)"
+                        @mousemove="onMouseMove($event, 2)"
+                        @mouseleave="onMouseLeave($event)"
+                        @click="open = false; focusButton()"
+                        >50</a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div x-data="Components.menu({ open: false })" x-init="init()" @keydown.escape.stop="open = false; focusButton()" @click.away="onClickAway($event)" class="px-4 relative inline-block text-left">
+                  <div>
+                    <button
+                      type="button"
+                      class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                      id="menu-button"
+                      x-ref="button"
+                      @click="onButtonClick()"
+                      @keyup.space.prevent="onButtonEnter()"
+                      @keydown.enter.prevent="onButtonEnter()"
+                      aria-expanded="false"
+                      aria-haspopup="true"
+                      x-bind:aria-expanded="open.toString()"
+                      @keydown.arrow-up.prevent="onArrowUp()"
+                      @keydown.arrow-down.prevent="onArrowDown()">
+                      Sort by:
+                      <b class="pl-2">Newest</b>
+                      <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div
+                    x-show="open"
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    class="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    x-ref="menu-items"
+                    x-description="Dropdown menu, show/hide based on menu state."
+                    x-bind:aria-activedescendant="activeDescendant"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="menu-button"
+                    tabindex="-1"
+                    @keydown.arrow-up.prevent="onArrowUp()"
+                    @keydown.arrow-down.prevent="onArrowDown()"
+                    @keydown.tab="open = false"
+                    @keydown.enter.prevent="open = false; focusButton()"
+                    @keyup.space.prevent="open = false; focusButton()"
+                    style="display: none">
+                    <div class="py-1" role="none">
+                      <a
+                        href="#"
+                        class="font-medium text-gray-900 block px-4 py-2 text-sm"
+                        x-state:on="Active"
+                        x-state:off="Not Active"
+                        x-state:on:option.current="Selected"
+                        x-state:off:option.current="Not Selected"
+                        x-state-description='Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"'
+                        :class="{ 'bg-gray-100': activeIndex === 0 }"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-0"
+                        @mouseenter="onMouseEnter($event)"
+                        @mousemove="onMouseMove($event, 0)"
+                        @mouseleave="onMouseLeave($event)"
+                        @click="open = false; focusButton()"
+                        >Newest</a
+                      >
+                      <a
+                        href="#"
+                        class="text-gray-500 block px-4 py-2 text-sm"
+                        x-state-description='undefined: "font-medium text-gray-900", undefined: "text-gray-500"'
+                        :class="{ 'bg-gray-100': activeIndex === 1 }"
+                        role="menuitem"
+                        tabindex="-1"
+                        id="menu-item-1"
+                        @mouseenter="onMouseEnter($event)"
+                        @mousemove="onMouseMove($event, 1)"
+                        @mouseleave="onMouseLeave($event)"
+                        @click="open = false; focusButton()"
+                        >Oldest</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Show Sort -->
+
+    <!-- Ideas List -->
+    <ul role="list" class="pb-12 sm:px-24 mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+      <li class="list-item">
+        <img
+          class="aspect-[3/2] w-full rounded-2xl object-cover"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=8&amp;w=1024&amp;h=1024&amp;q=80"
+          alt="" />
+        <div class="px-4">
+          <p class="mt-4 text-base leading-7 text-gray-600">25 Desember 2024</p>
+          <h3 class="text-xl pt-2 font-semibold pb-4 text-gray-900">Selamat Hari Natal dan Tahun Baru</h3>
+        </div>
+      </li>
+    </ul>
+    <!-- Ideas List -->
+
+    <!-- Pagination -->
+    <nav aria-label="Pagination" class="mx-auto mt-6 flex max-w-7xl justify-between px-4 text-sm font-medium text-gray-700 sm:px-6 lg:px-8">
+      <div class="min-w-0 flex-1"></div>
+      <div class="hidden space-x-2 sm:flex">
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >Previous</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-orange-600 bg-white px-4 ring-1 ring-orange-600 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >1</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >2</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >3</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >4</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >5</a
+        >
+        <a
+          href="#"
+          class="inline-flex h-10 items-center rounded-md border border-gray-300 bg-white px-4 hover:bg-gray-100 focus:border-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-opacity-25 focus:ring-offset-1 focus:ring-offset-orange-600"
+          >Next</a
+        >
+      </div>
+      <div class="flex min-w-0 flex-1 justify-end"></div>
+    </nav>
+    <!-- Pagination -->
+  </body>
 </html>
